@@ -1,34 +1,33 @@
-let mDays = [31,28,31,30,31,30,31,31,30,31,30,31] // Month Array
+let mDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // Month Array
 document.getElementById('button').addEventListener('click', launcher) // Click listener
 
-function launcher(){ // launches other functions
+function launcher () { // launches other functions
 // initilize variables
-let today = new Date()
-let iDay = document.getElementById('day').value
-let iMonth = (document.getElementById('month').value) - 1
-let iYear = document.getElementById('year').value
-let iYear2 = parseInt(iYear) + 1
-let sYear = today.getFullYear()
-let sDay = today.getDate()
-let sMonth = today.getMonth()
-let sDOY = 0
-let iDOY = 0
-let iDif = 0
-let days = 0
-let totalDays = 0
+  let today = new Date()
+  let iDay = document.getElementById('day').value
+  let iMonth = (document.getElementById('month').value) - 1
+  let iYear = document.getElementById('year').value
+  let iYear2 = parseInt(iYear) + 1
+  let sYear = today.getFullYear()
+  let sDay = today.getDate()
+  let sMonth = today.getMonth()
+  let sDOY = 0
+  let iDOY = 0
+  let iDif = 0
+  let days = 0
+  let totalDays = 0
 
-iDOY = dayOfYear(iMonth, iDay, iYear) // calc day of year for input
-//alert('input DOY ' + iDOY)
-sDOY = dayOfYear(sMonth, sDay, sYear) // calc day of year for system
-//alert('System DOY ' + sDOY)
-iDif = doyDif(iDOY, iYear) // calc how many days left in year for input
-//alert('Input DIFF ' + iDif)
-days = addYears(iYear2, sYear)//calc days in folowing years
-//alert('Days from years ' + days)
-totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY)//calc total days
-//alert('after SUM ' + totalDays)
-writeHTML(totalDays) //prints to HTML
-
+  iDOY = dayOfYear(iMonth, iDay, iYear) // calc day of year for input
+  //alert('input DOY ' + iDOY)
+  sDOY = dayOfYear(sMonth, sDay, sYear) // calc day of year for system
+  //alert('System DOY ' + sDOY)
+  iDif = doyDif(iDOY, iYear) // calc how many days left in year for input
+  //alert('Input DIFF ' + iDif)
+  days = addYears(iYear2, sYear)//calc days in folowing years
+  //alert('Days from years ' + days)
+  totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY)//calc total days
+  //alert('after SUM ' + totalDays)
+  writeHTML(totalDays) // prints to HTML
 }
 
 function isLeap(z){
@@ -64,7 +63,7 @@ function dayOfYear(x, y, z){
     }
     count = count + parseInt(y)
     return count
-  }
+   }
   } else {
       for (i = 0; i < x; i++){
           count = count + mDays[i]
