@@ -1,48 +1,104 @@
-//varibles
-let month = 0
-let mDays = [31,28,31,30,31,30,31,31,30,31,30,31]
-let day = 0
-let year = 0
-let m = 0
-let d = 0
-let y = 0
-let mm = 6
-let dd = 21
-let yy = 2021
-let isLeap = false
-let today = new Date()
-//button
-document.getElementById('button').addEventListener('click', calculate)
+let mDays = [31,28,31,30,31,30,31,31,30,31,30,31]; // Month Array
+document.getElementById('button').addEventListener('click', launcher); // Click listener
 
-function calculate () {
-  // -1 to match array order (it stats at 0 not 1)
-  month = document.getElementById('month').value - 1
-  day = document.getElementById('day').value
-  year = document.getElementById('year').value
-  mm = today.getMonth()
-  dd = today.getDate()
-  yy = today.getFullYear()
-  if (year > yy) {
-    alert ('please input past date')
+function launcher(){ // launches other functions
+// initilize variables
+let today = new Date();
+let iDay = document.getElementById('day').value;
+let iMonth = (document.getElementById('month').value) - 1;
+let iYear = document.getElementById('year').value;
+let iYear2 = parseInt(iYear) + 1;
+let sYear = today.getFullYear();
+let sDay = today.getDate();
+let sMonth = today.getMonth();
+let sDOY = 0;
+let iDOY = 0;
+let iDif = 0;
+let days = 0;
+let totalDays = 0;
+
+iDOY = dayOfYear(iMonth, iDay, iYear); // calc day of year for input
+//alert('input DOY ' + iDOY);
+sDOY = dayOfYear(sMonth, sDay, sYear); // calc day of year for system
+//alert('System DOY ' + sDOY);
+iDif = doyDif(iDOY, iYear); // calc how many days left in year for input
+//alert('Input DIFF ' + iDif);
+days = addYears(iYear2, sYear);//calc days in folowing years
+//alert('Days from years ' + days);
+totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY);//calc total days
+//alert('after SUM ' + totalDays);
+writeHTML(totalDays); //prints to HTML
+
+}
+
+function isLeap(z){
+  if ((z % 4) === 0 && (z % 100) !== 0 || (z % 400) === 0){
+  return true;
   } else {
-    //start of leapyear code
-    //caluclation if it is a leap year
-    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
-      isLeap = true
-    } else {isLeap = false}
-    //will run only if the month is less than or = to 1 (feb) and leap year is true
-    if (month <= 1 && isLeap == true){
-      //loop to add days of the month starting with the month provided
-      for (i = month ; i < 12 ; i++){
-        if (i == 1){
-          d = d + 29
-        } else {
-          d = d + mDays[i]
-        }
-      } d = d - day
+   return false;
+ }
+}
+
+function doyDif(x, z){
+  if (isLeap(z)) {
+    count = 366 - parseInt(x);
+    return count;
+  } else {
+    count = 365 - parseInt(x);
+    return count;
+  }
+}
+
+function dayOfYear(x, y, z){
+  let count = 0;
+  if (x > 1) {
+    if (isLeap(z)){        
+      for (i = 0; i < x; i++){
+        count = count + mDays[i];
+      }
+      count = (count + 1) + parseInt(y);
+      return count;
+    } else {
+      for (i = 0; i < x; i++){
+        count = (count + mDays[i]) ;
+    }
+    count = count + parseInt(y);
+    return count;
+  }
+  } else {
+      for (i = 0; i < x; i++){
+          count = count + mDays[i];
+      }
+      count = count + parseInt(y);
+      return count;
+  }
+}
+
+function addYears(z, y){
+  let count = 0;
+  for (z ; z < y; z++){
+    if (isLeap(z)){
+      count = count + 366;
+    } else if (z == y) {
+      return 0
+      } else {
+      count = count + 365;
     }
   }
-  document.getElementById('m').innerHTML = (m)
-  document.getElementById('d').innerHTML = (d)
-  document.getElementById('y').innerHTML = (y)
+  return count;
+}
+
+function sumResults(x, y, z, a, b, c){//sDOY, iDif, days, iYear, sYear, iDOY
+  let count = 0
+  if (a == b) {
+    count = parseInt(x) - parseInt(c)
+    return count
+  } else {
+    count = parseInt(x) + parseInt(y) + parseInt(z);
+    return count;
+  }
+}
+
+function writeHTML(z){
+  document.getElementById('d').innerHTML = (z);
 }
