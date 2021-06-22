@@ -15,7 +15,8 @@ let today = new Date()
 document.getElementById('button').addEventListener('click', calculate)
 
 function calculate () {
-  month = document.getElementById('month').value - 1 // -1 to match array order (it stats at 0 not 1)
+  // -1 to match array order (it stats at 0 not 1)
+  month = document.getElementById('month').value - 1
   day = document.getElementById('day').value
   year = document.getElementById('year').value
   mm = today.getMonth()
@@ -27,18 +28,21 @@ function calculate () {
     //start of leapyear code
     //caluclation if it is a leap year
     if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
-      isLeap = true 
+      isLeap = true
     } else {isLeap = false}
-    //will run only if the month is less than or = to 1 (feb)and leap year is true
+    //will run only if the month is less than or = to 1 (feb) and leap year is true
     if (month <= 1 && isLeap == true){
       //loop to add days of the month starting with the month provided
       for (i = month ; i < 12 ; i++){
-        if (i == 1){//
-          d = d + 29//
+        if (i == 1){
+          d = d + 29
         } else {
           d = d + mDays[i]
         }
       } d = d - day
     }
   }
+  document.getElementById('m').innerHTML = (m)
+  document.getElementById('d').innerHTML = (d)
+  document.getElementById('y').innerHTML = (y)
 }
