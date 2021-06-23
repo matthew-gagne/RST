@@ -60,11 +60,11 @@ function dayOfYear (x, y, z) {
       return count
     } else {
       for (let i = 0; i < x; i++) {
-        count = (count + mDays[i]) 
+        count = (count + mDays[i])
+      }
+      count = count + parseInt(y)
+      return count
     }
-    count = count + parseInt(y)
-    return count
-   }
   } else {
     for (let i = 0; i < x; i++) {
       count = count + mDays[i]
