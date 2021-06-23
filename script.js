@@ -31,7 +31,7 @@ function launcher () { // launches other functions
 }
 
 function isLeap (z) {
-  if ((z % 4) === 0 && (z % 100) !== 0 || (z % 400) === 0) {
+  if (((z % 4) === 0 && (z % 100) !== 0) || ((z % 400) === 0)) {
     return true
   } else {
     return false
