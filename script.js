@@ -90,7 +90,7 @@ function addYears (z, y) {
 
 function sumResults (x, y, z, a, b, c) { // sDOY, iDif, days, iYear, sYear, iDOY
   let count = 0
-  if (a === b) {
+  if (a == b) {
     count = parseInt(x) - parseInt(c)
     return count
   } else {
