@@ -1,16 +1,16 @@
-let mDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // Month Array
+const mDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] // Month Array
 document.getElementById('button').addEventListener('click', launcher) // Click listener
 
 function launcher () { // launches other functions
 // initilize variables
-  let today = new Date()
-  let iDay = document.getElementById('day').value
-  let iMonth = (document.getElementById('month').value) - 1
-  let iYear = document.getElementById('year').value
-  let iYear2 = parseInt(iYear) + 1
-  let sYear = today.getFullYear()
-  let sDay = today.getDate()
-  let sMonth = today.getMonth()
+  const today = new Date()
+  const iDay = document.getElementById('day').value
+  const iMonth = (document.getElementById('month').value) - 1
+  const iYear = document.getElementById('year').value
+  const iYear2 = parseInt(iYear) + 1
+  const sYear = today.getFullYear()
+  const sDay = today.getDate()
+  const sMonth = today.getMonth()
   let sDOY = 0
   let iDOY = 0
   let iDif = 0
@@ -18,27 +18,28 @@ function launcher () { // launches other functions
   let totalDays = 0
 
   iDOY = dayOfYear(iMonth, iDay, iYear) // calc day of year for input
-  //alert('input DOY ' + iDOY)
+  // alert('input DOY ' + iDOY)
   sDOY = dayOfYear(sMonth, sDay, sYear) // calc day of year for system
-  //alert('System DOY ' + sDOY)
+  // alert('System DOY ' + sDOY)
   iDif = doyDif(iDOY, iYear) // calc how many days left in year for input
-  //alert('Input DIFF ' + iDif)
+  // alert('Input DIFF ' + iDif)
   days = addYears(iYear2, sYear)//calc days in folowing years
-  //alert('Days from years ' + days)
+  // alert('Days from years ' + days)
   totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY)//calc total days
-  //alert('after SUM ' + totalDays)
+  // alert('after SUM ' + totalDays)
   writeHTML(totalDays) // prints to HTML
 }
 
-function isLeap(z){
+function isLeap (z) {
   if ((z % 4) === 0 && (z % 100) !== 0 || (z % 400) === 0){
-  return true
+    return true
   } else {
-   return false
- }
+    return false
+  }
 }
 
-function doyDif(x, z){
+function doyDif (x, z) {
+  let count = 0
   if (isLeap(z)) {
     count = 366 - parseInt(x)
     return count
@@ -48,11 +49,11 @@ function doyDif(x, z){
   }
 }
 
-function dayOfYear(x, y, z){
+function dayOfYear (x, y, z) {
   let count = 0
   if (x > 1) {
-    if (isLeap(z)){        
-      for (i = 0; i < x; i++){
+    if (isLeap(z)) {        
+      for (i = 0; i < x; i++) {
         count = count + mDays[i]
       }
       count = (count + 1) + parseInt(y)
@@ -73,9 +74,9 @@ function dayOfYear(x, y, z){
   }
 }
 
-function addYears(z, y){
+function addYears (z, y) {
   let count = 0
-  for (z ; z < y; z++){
+  for (z ; z < y; z++) {
     if (isLeap(z)){
       count = count + 366
     } else if (z == y) {
@@ -87,7 +88,7 @@ function addYears(z, y){
   return count
 }
 
-function sumResults(x, y, z, a, b, c){//sDOY, iDif, days, iYear, sYear, iDOY
+function sumResults (x, y, z, a, b, c) {//sDOY, iDif, days, iYear, sYear, iDOY
   let count = 0
   if (a == b) {
     count = parseInt(x) - parseInt(c)
@@ -98,6 +99,6 @@ function sumResults(x, y, z, a, b, c){//sDOY, iDif, days, iYear, sYear, iDOY
   }
 }
 
-function writeHTML(z){
+function writeHTML (z) {
   document.getElementById('d').innerHTML = (z)
 }
