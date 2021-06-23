@@ -23,15 +23,15 @@ function launcher () { // launches other functions
   // alert('System DOY ' + sDOY)
   iDif = doyDif(iDOY, iYear) // calc how many days left in year for input
   // alert('Input DIFF ' + iDif)
-  days = addYears(iYear2, sYear)//calc days in folowing years
+  days = addYears(iYear2, sYear) // calc days in folowing years
   // alert('Days from years ' + days)
-  totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY)//calc total days
+  totalDays = sumResults(sDOY, iDif, days, iYear, sYear, iDOY) // calc total days
   // alert('after SUM ' + totalDays)
   writeHTML(totalDays) // prints to HTML
 }
 
 function isLeap (z) {
-  if ((z % 4) === 0 && (z % 100) !== 0 || (z % 400) === 0){
+  if ((z % 4) === 0 && (z % 100) !== 0 || (z % 400) === 0) {
     return true
   } else {
     return false
@@ -52,45 +52,45 @@ function doyDif (x, z) {
 function dayOfYear (x, y, z) {
   let count = 0
   if (x > 1) {
-    if (isLeap(z)) {        
-      for (i = 0; i < x; i++) {
+    if (isLeap(z)) {
+      for (let i = 0; i < x; i++) {
         count = count + mDays[i]
       }
       count = (count + 1) + parseInt(y)
       return count
     } else {
-      for (i = 0; i < x; i++){
+      for (let i = 0; i < x; i++) {
         count = (count + mDays[i]) 
     }
     count = count + parseInt(y)
     return count
    }
   } else {
-      for (i = 0; i < x; i++){
-          count = count + mDays[i]
-      }
-      count = count + parseInt(y)
-      return count
+    for (let i = 0; i < x; i++) {
+      count = count + mDays[i]
+    }
+    count = count + parseInt(y)
+    return count
   }
 }
 
 function addYears (z, y) {
   let count = 0
-  for (z ; z < y; z++) {
-    if (isLeap(z)){
+  for (z; z < y; z++) {
+    if (isLeap(z)) {
       count = count + 366
-    } else if (z == y) {
+    } else if (z === y) {
       return 0
-      } else {
+    } else {
       count = count + 365
     }
   }
   return count
 }
 
-function sumResults (x, y, z, a, b, c) {//sDOY, iDif, days, iYear, sYear, iDOY
+function sumResults (x, y, z, a, b, c) { // sDOY, iDif, days, iYear, sYear, iDOY
   let count = 0
-  if (a == b) {
+  if (a === b) {
     count = parseInt(x) - parseInt(c)
     return count
   } else {
